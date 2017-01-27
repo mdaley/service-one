@@ -9,15 +9,19 @@
              [json :refer [wrap-json-response
                            wrap-json-body]]]
             [ring.util.response :as resp]
-            [taoensso.timbre :as log])
+            [taoensso.timbre :as log]
+            [service-one.config :as config])
   (:import (org.slf4j MDC)))
 
+(defn- healthcheck []
+  (str "version " (config/version "service-one")))
 
 (defn ->app-routes
   []
   (defroutes app-routes
     (routes
-     (GET "/ping" [] "pong"))
+     (GET "/ping" [] "pong")
+     (GET "/healthcheck" [] (healthcheck)))
     (route/not-found "Not Found")))
 
 (defn wrap-exception-handling
