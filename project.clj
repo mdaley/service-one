@@ -1,4 +1,4 @@
-(defproject service-one "0.0.5-SNAPSHOT"
+(defproject service-one "0.0.5"
   :description "This is the service-one system"
   :url ""
   :min-lein-version "2.0.0"
