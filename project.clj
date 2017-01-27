@@ -29,4 +29,6 @@
                    :integration :integration
                    :all (constantly true)}
 
-  :main service-one.main)
+  :main service-one.main
+
+  :lein-release {:scm :git})
