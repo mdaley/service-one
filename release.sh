@@ -6,6 +6,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 lein vcs assert-committed
+lein change version leiningen.release/bump-version release
 lein vcs commit
 git tag `cat project.clj | grep defproject | cut -d" " -f 3 | tr -d "\""` # OK, just about reasonable!
 
