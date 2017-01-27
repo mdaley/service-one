@@ -8,7 +8,13 @@ IFS=$'\n\t'
 lein vcs assert-committed
 lein change version leiningen.release/bump-version release
 lein vcs commit
-git tag `cat project.clj | grep defproject | cut -d" " -f 3 | tr -d "\""` # OK, just about reasonable!
+
+version=`cat project.clj | grep defproject | cut -d" " -f 3 | tr -d "\""` # OK, just about reasonable!
+git tag $version
+
+lein uberjar
+docker build -t mdaley/service-one:$version .
+docker push  mdaley/service-one:$version
 
 lein change version leiningen.release/bump-version
 lein vcs commit
